@@ -44,10 +44,7 @@ def process_teams (filePath):
       #print(md)
       #df = pd.read_table('mf.md', sep="|", header=0, index_col=1, skipinitialspace=True).dropna(axis=1, how='all').iloc[1:0]
 
-      #df = pd.read_table('df.md', sep="|", header=0, index_col=1, skipinitialspace=True).dropna(axis=1, how='all').iloc[1:]
-      df = pd.read_table(filePath, sep="|", header=0, index_col=1,skipinitialspace=True,skiprows=[1,2,3,4,5]).dropna(axis=1, how='all').iloc[1:]
 
-      print(df)
       
      
 
