@@ -1,0 +1,51 @@
+1. Install WSL2.
+  a. Find the application called Windows Powershell in the main menu.
+  b. Right click on the binary and run as administrator.
+  c. On the command line run the command:
+     dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+2. Install Linux into WSL2
+  a. Open Windows Store
+  b. Search for WSL
+  c. You will see a bunch of UNIX system options.
+  d. Choose Ubuntu
+  e. Once it has been downloaded, from the Windows start menu, choose Ubuntu 20.04 LTS
+  f. If WSL is not properly installed you will see an error message with a link to a Microsoft page that explains how to install it. Otherwise, it will install the package.
+  g. When it finishes, you can run it and if it worked, a bash shell will start that looks a lot like the powershell one we saw earlier -- but it will be running in a ``chroot'' environment. 
+ h. This may be a little confusing at first, but it is essentially a fully featured version of Ubuntu running on your machine. So you can check the Ubuntu documentation on how to do various things and it will work exactly the same here. For example you can type the following command to install zsh, which is an alternative shell:
+  sudo apt-get install zsh
+  i. Your Windows home directory is mounted as well so you can get files from there or move things there too. It will be in ``/mnt/c/Users/<your user name>''.
+3. Now install Anaconda with this command:
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+4. Install it by typing:
+  sh Miniconda-latest-Linux-x86_64.sh
+  a. Follow the prompts and complete the installation.
+  b. When it finishes, you may need to refresh your environment to pick up the path changes. So either restart the shell or type something like ``source ~/.bashrc'' if you are in a bash shell.
+  c. Now to test your environment is right, type:
+    conda update --all
+  d. If you get an error message, your environment, is not right. So run the command:
+  ~/miniconda3/bin/conda init bash
+  source ~/.bashrc
+  e. You can run this command to show your current path config:
+  echo $PATH
+  f. You should see that the miniconda3/bin directory is in your path.
+5. Now create your environment for the assignment. 
+  a. Create the main environment by running:
+    conda create -n PDSA1 python=3.8
+  b. Activate the environment with:
+    conda activate PDSA1
+6. Now grab a copy of the assignment by running:
+  wget http://seg.rmit.edu.au/A1.zip
+7. Uncompress it with:
+  unzip A1.zip
+8. Now we will finish the environment. Make sure your environment is active:
+  conda activate PDSA1
+  cd A1
+  pip install -r requirements.txt
+9. Hopefully, you did not get any errors. If not, you're all set.
+10. Now the last step is to start jupyter notebooks. Run this command:
+  jupyter notebook A1.ipynb
+11. You will see a lot of logging information as it starts in the console. At the end you should see several lines that tell you how to open the page in your windows web browser. Use one of them that start with https and not file. For example ``https://localhost:8888/?token=blahblahblah''.
+12. If you cut and paste that into your web browser of choice, you should be in the jupyter notebook!
+ 
+   
+  
