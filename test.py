@@ -23,10 +23,12 @@ for file in os.listdir(location):
 def process_teams (filePath):
     data_array= []
     with open(filePath,'r') as f:
-        for line in f:
-            if re.match("Rnd")
+        for line in f:             
             fields = line.split('|')
-            if len(fields)>1:
+             
+            if fields[0] not in " Rnd ":
+                pass
+            else:
                 v=fields[1:14]
                 data_array.append(v)
                 # print(mList)
