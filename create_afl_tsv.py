@@ -18,13 +18,21 @@ or easily compute and validate simple statistical
 data by walking each rown in the list as you will
 know what information it should contain.
 '''
+
+ # '''The main data array. '''
 def process_teams (input_files):
-  '''The main data array. '''
-  data_array = []  
+    data_array= []
+    for i in input_files:
+      with open(i,'r') as f:
+        for line in f:
+            fields = line.split('|')
+            if len(fields)>1:
+                v=fields[1:14]
+                data_array.append(v)
+                # print(mList)
+      return data_array 
 
-  ''' TODO by you '''
 
-  return data_array
 
 '''
 This is the main function.
@@ -44,6 +52,6 @@ if __name__ == "__main__":
   helper.zero_error_log(error_log)
   teams_files = helper.read_input_file_names(teams_file)
   data_array = process_teams(teams_files)
-  #helper.print_header()
+  helper.print_header()
   helper.print_array(data_array,array_file)
 
