@@ -14,13 +14,21 @@ You have the goals and behinds from the string, you need
 to cast them to an integer to do any computations with
 them.
 '''
+
 def compute_score(S):
   
-  ''' 
-  TODO by you. Return the correct score as described
-  above. 
-  '''
-
+  result = []
+  for i in S:
+    
+    Total_Split        = i.split()
+    last_Quater        = Total_Split[3]
+    last_Quater_Split  = last_Quater.split('.')
+    mulSix             = int(last_Quater_Split[0])*6
+    mulOne             = int(last_Quater_Split[1])
+    total_Score        = mulSix + mulOne
+    total_Str = ' '+ str(total_Score)+' '
+    result.append(total_Str)
+    
   return result
 
 '''
@@ -35,11 +43,56 @@ returns a modified data array that should have 100% of the
 statistics correct.
 '''
 def validate_all_scores (data_array):
-
-  ''' 
-  TODO by you. The input is the original data_array and
-  the return value is the corrected data array. 
-  '''
+  
+  for line in data_array:
+      
+      home_Total = line[5] #3
+      away_Total = line[7] #5
+      
+      def_compute_score = [home_Total, away_Total]  
+      computeScore = compute_score(def_compute_score)
+      
+      val_For_Total = line[6] #4
+      val_Against_Total = line[8] #6
+      margin = line[10] #8 
+      result = line[9] #7
+      
+      # For_Total Validation and Update
+      if(computeScore[0] != line[6]):
+        line[6] = computeScore[0]
+        #print(f"Incorrect value found in Round {line[0]} during For_Total validation. The incorrect value was {val_For_Total} and it has been updated to {line[4]}")
+      
+      # Against_Total Validation and Update
+      if(computeScore[1] != line[8]):
+        line[8] = computeScore[1]
+        #print(f"Incorrect value found in Round {line[0]} during Against_Total validation. The incorrect value was {val_Against_Total} and it has been updated to {line[6]}")
+      
+      computed_Total = (int(computeScore[0]) - int(computeScore[1])) 
+      md_conv_Total = ' '+str(computed_Total)+' '
+      
+      
+      # Margin validation and Update
+      if(md_conv_Total != line[10]):
+        line[10] = md_conv_Total
+        #print(f"Incorrect value found in Round {line[0]} during Margin validation. The incorrect value was {margin} and it has been updated to {line[8]}")
+      
+      
+      # Result validation and update 
+      if (computed_Total > 0):
+        win_Result = ' W '
+        if(win_Result != line[9]):
+          line[9] = win_Result
+          #print(f"Incorrect value found in Round {line[0]} during Result validation. The incorrect value was {result} and it has been updated to {line[7]}")
+      elif(computed_Total < 0):
+        lose_Result = ' L '
+        if(lose_Result != line[9]):
+          line[9] = lose_Result
+          #print(f"Incorrect value found in Round {line[0]} during Result validation. The incorrect value was {result} and it has been updated to {line[7]}")
+      else:
+        draw_result = ' D '
+        if(draw_result != line[9]):
+          line[9] = draw_result
+          #print(f"Incorrect value found in Round {line[0]} during Result validation. The incorrect value was {result} and it has been updated to {line[7]}")
 
   return data_array
 
